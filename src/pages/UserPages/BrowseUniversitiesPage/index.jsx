@@ -6,6 +6,7 @@ import { useLanguage } from '../../../context/LanguageContext';
 import { useGetUniversitiesQuery, useGetCountriesQuery } from '../../../services/apis/userApi';
 import { checkCountryMatch, checkLanguageMatch } from '../../../utils/filterUtils';
 import { resolveMediaUrl } from '../../../config/env';
+import { localizeLanguages } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=70';
@@ -26,10 +27,10 @@ const TEACHING_LANGUAGES = [
 const SKELETON_COUNT = 6;
 
 function UniversityCard({ uni, index }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const cover = resolveMediaUrl(uni.images?.[0] || uni.logoUrl) || FALLBACK_IMAGE;
   const location = [uni.city, uni.country].filter(Boolean).join(', ');
-  const mainLanguage = uni.teachingLanguage ? uni.teachingLanguage.split(/[,/]/)[0].trim() : '';
+  const mainLanguage = uni.teachingLanguage ? localizeLanguages(uni.teachingLanguage.split(/[,/]/)[0].trim(), i18n.language) : '';
 
   return (
     <li className="bu-grid__item" data-reveal style={{ '--delay': `${Math.min(index % 6, 5) * 60}ms` }}>
@@ -76,7 +77,7 @@ function UniversityCard({ uni, index }) {
             </span>
             <span className="bu-card__fact">
               <small>{t('matchedUniversities.labels.language', 'Tədris dili')}</small>
-              <span title={uni.teachingLanguage || undefined}>{mainLanguage || '—'}</span>
+              <span title={localizeLanguages(uni.teachingLanguage, i18n.language) || undefined}>{mainLanguage || '—'}</span>
             </span>
           </span>
         </span>

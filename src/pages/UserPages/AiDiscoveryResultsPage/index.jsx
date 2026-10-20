@@ -6,6 +6,7 @@ import { useLanguage } from '../../../context/LanguageContext';
 import { useGetUniversitiesQuery, useGetCountriesQuery } from '../../../services/apis/userApi';
 import { checkCountryMatch, checkLanguageMatch } from '../../../utils/filterUtils';
 import ScrollToTop from '../../../components/Common/ScrollToTop';
+import { localizeLanguages } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE =
@@ -18,7 +19,7 @@ const parseRank = (ranking) => {
 };
 
 function AiDiscoveryResultsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { language } = useLanguage();
   const navigate = useNavigate();
 
@@ -294,7 +295,7 @@ function AiDiscoveryResultsPage() {
                           {uni.teachingLanguage && (
                             <div>
                               <dt>{t('matchedUniversities.labels.language', 'Tədris Dili')}</dt>
-                              <dd>{uni.teachingLanguage}</dd>
+                              <dd>{localizeLanguages(uni.teachingLanguage, i18n.language)}</dd>
                             </div>
                           )}
                         </dl>

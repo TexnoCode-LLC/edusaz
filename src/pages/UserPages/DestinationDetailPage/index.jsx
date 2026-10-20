@@ -20,6 +20,7 @@ import {
 } from '../../../services/apis/userApi';
 import { resolveMediaUrl } from '../../../config/env';
 import ScrollToTop from '../../../components/Common/ScrollToTop';
+import { localizeDate, localizeLanguages } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1400&q=70';
@@ -53,7 +54,7 @@ function DetailSkeleton() {
 
 function DestinationDetailPage() {
   const { id = 'az' } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { language } = useLanguage();
 
   const { data: countryData, isLoading: isCountryLoading } = useGetCountryByIdQuery({
@@ -200,7 +201,7 @@ function DestinationDetailPage() {
                           {uni.teachingLanguage && (
                             <span>
                               <small>{t('matchedUniversities.labels.language', 'Tədris dili')}</small>
-                              {uni.teachingLanguage}
+                              {localizeLanguages(uni.teachingLanguage, i18n.language)}
                             </span>
                           )}
                         </span>
@@ -259,7 +260,7 @@ function DestinationDetailPage() {
                   {s.description && <p className="ddp-sch__desc">{s.description.slice(0, 120)}...</p>}
                   {s.deadline && (
                     <p className="ddp-sch__deadline">
-                      {t('scholarshipsSection.deadline', 'Son müraciət')}: <strong>{s.deadline}</strong>
+                      {t('scholarshipsSection.deadline', 'Son müraciət')}: <strong>{localizeDate(s.deadline, i18n.language)}</strong>
                     </p>
                   )}
                 </li>
