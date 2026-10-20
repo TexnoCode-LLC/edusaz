@@ -33,7 +33,7 @@ import { AutoTranslate } from '../../../hooks/useAutoTranslate';
 import { resolveMediaUrl } from '../../../config/env';
 import Cookies from 'js-cookie';
 import ScrollToTop from '../../../components/Common/ScrollToTop';
-import { localizeDate, localizeLanguages } from '../../../locales/dataLabels';
+import { localizeDate, localizeLanguages, localizeTuition } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1600&q=75';
@@ -292,7 +292,7 @@ function UniversityDetailPage() {
   const websiteHost = uni.websiteUrl ? uni.websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
 
   const facts = [
-    { key: 'tuition', label: t('matchedUniversities.labels.tuition', 'Təhsil haqqı'), value: uni.tuition },
+    { key: 'tuition', label: t('matchedUniversities.labels.tuition', 'Təhsil haqqı'), value: localizeTuition(uni.tuition, i18n.language) },
     { key: 'acceptance', label: t('matchedUniversities.labels.acceptance', 'Qəbul faizi'), value: uni.acceptanceRate },
     { key: 'language', label: t('matchedUniversities.labels.language', 'Tədris dili'), value: localizeLanguages(uni.teachingLanguage, i18n.language) },
     { key: 'deadline', label: t('scholarshipsSection.deadline', 'Son müraciət'), value: localizeDate(uni.deadline, i18n.language) },
@@ -652,7 +652,7 @@ function UniversityDetailPage() {
                   {uni.tuition && (
                     <div>
                       <dt>{t('matchedUniversities.labels.tuition', 'Təhsil haqqı')}</dt>
-                      <dd>{uni.tuition}</dd>
+                      <dd>{localizeTuition(uni.tuition, i18n.language)}</dd>
                     </div>
                   )}
                 </dl>

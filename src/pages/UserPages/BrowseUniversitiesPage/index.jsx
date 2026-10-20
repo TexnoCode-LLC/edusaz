@@ -6,7 +6,7 @@ import { useLanguage } from '../../../context/LanguageContext';
 import { useGetUniversitiesQuery, useGetCountriesQuery } from '../../../services/apis/userApi';
 import { checkCountryMatch, checkLanguageMatch } from '../../../utils/filterUtils';
 import { resolveMediaUrl } from '../../../config/env';
-import { localizeLanguages } from '../../../locales/dataLabels';
+import { localizeLanguages, localizeTuition } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=70';
@@ -69,7 +69,7 @@ function UniversityCard({ uni, index }) {
           <span className="bu-card__facts">
             <span className="bu-card__fact">
               <small>{t('matchedUniversities.labels.tuition', 'Təhsil haqqı')}</small>
-              <span>{uni.tuition || '—'}</span>
+              <span>{localizeTuition(uni.tuition, i18n.language) || '—'}</span>
             </span>
             <span className="bu-card__fact">
               <small>{t('matchedUniversities.labels.acceptance', 'Qəbul faizi')}</small>

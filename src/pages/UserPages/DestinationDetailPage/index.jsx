@@ -20,7 +20,7 @@ import {
 } from '../../../services/apis/userApi';
 import { resolveMediaUrl } from '../../../config/env';
 import ScrollToTop from '../../../components/Common/ScrollToTop';
-import { localizeDate, localizeLanguages } from '../../../locales/dataLabels';
+import { localizeDate, localizeLanguages, localizeTuition } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1400&q=70';
@@ -195,7 +195,7 @@ function DestinationDetailPage() {
                           {uni.tuition && (
                             <span>
                               <small>{t('landing.universities.tuition', 'Təhsil haqqı')}</small>
-                              {uni.tuition}
+                              {localizeTuition(uni.tuition, i18n.language)}
                             </span>
                           )}
                           {uni.teachingLanguage && (

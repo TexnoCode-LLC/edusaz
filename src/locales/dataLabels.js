@@ -77,3 +77,19 @@ export function localizeDate(value, lang) {
     return value;
   }
 }
+
+// "per year" for tuition entered as "2500-5000 AZN / il".
+const PER_YEAR = {
+  en: 'year', de: 'Jahr', fr: 'an', es: 'año', it: 'anno', pt: 'ano', nl: 'jaar', pl: 'rok', tr: 'yıl', ru: 'год',
+  ar: 'سنة', zh: '年', ja: '年', ko: '년', el: 'έτος', sv: 'år', nb: 'år', fi: 'vuosi', da: 'år', hu: 'év', cs: 'rok',
+  sk: 'rok', ro: 'an', bg: 'година', hr: 'godina', uk: 'рік', ka: 'წელი', hy: 'տարի', kk: 'жыл', uz: 'yil',
+};
+
+/** "2500-5000 AZN / il" → "2500-5000 AZN / year" (in the visitor's language). */
+export function localizeTuition(value, lang) {
+  if (!value) return value;
+  const locale = toLocale(lang);
+  if (locale === 'az') return value;
+  const word = PER_YEAR[locale] || PER_YEAR.en;
+  return value.replace(/\s*\/\s*il\b\.?/i, ` / ${word}`).replace(/\s{2,}/g, ' ');
+}

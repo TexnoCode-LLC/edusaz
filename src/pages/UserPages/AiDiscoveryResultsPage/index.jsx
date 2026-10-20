@@ -6,7 +6,7 @@ import { useLanguage } from '../../../context/LanguageContext';
 import { useGetUniversitiesQuery, useGetCountriesQuery } from '../../../services/apis/userApi';
 import { checkCountryMatch, checkLanguageMatch } from '../../../utils/filterUtils';
 import ScrollToTop from '../../../components/Common/ScrollToTop';
-import { localizeLanguages } from '../../../locales/dataLabels';
+import { localizeLanguages, localizeTuition } from '../../../locales/dataLabels';
 import './index.scss';
 
 const FALLBACK_IMAGE =
@@ -283,7 +283,7 @@ function AiDiscoveryResultsPage() {
                           {uni.tuition && (
                             <div>
                               <dt>{t('matchedUniversities.labels.tuition', 'Ödəniş')}</dt>
-                              <dd>{uni.tuition}</dd>
+                              <dd>{localizeTuition(uni.tuition, i18n.language)}</dd>
                             </div>
                           )}
                           {uni.acceptanceRate && (
