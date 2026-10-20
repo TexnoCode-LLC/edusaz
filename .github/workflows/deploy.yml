@@ -65,6 +65,8 @@ jobs:
 
       # --- 3. START SERVICES ON VPS & APPLY DB PERMISSIONS ---
       - name: Start Backend & Reverse Proxy
+        # Always runs: if an earlier step (e.g. the backend copy) fails, the stopped service must still come back up.
+        if: ${{ always() }}
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
