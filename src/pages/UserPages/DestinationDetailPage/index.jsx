@@ -116,7 +116,7 @@ function DestinationDetailPage() {
     { key: 'unis', icon: Building2, label: t('hero.stats.universities', 'Universitet'), value: universities.length },
     { key: 'programs', icon: BookOpen, label: t('pages.destinationDetail.programs', 'Proqram'), value: programs.length },
     { key: 'scholarships', icon: Award, label: t('hero.stats.scholarships', 'Təqaüd proqramı'), value: scholarships.length },
-  ].filter(Boolean);
+  ].filter((fact) => fact && fact.value); // a "0 programs" tile says nothing useful, so empty counts are hidden
 
   return (
     <main className="ds-page ddp-page">
