@@ -84,7 +84,7 @@ namespace Edusaz.Infrastructure.Migrations
                     (""Id"", ""Name"", ""Location"", ""CountryId"", ""UniversityId"", ""Status"", ""Amount"", ""Deadline"", ""Eligible"", ""Places"",
                      ""ButtonType"", ""IsDeleted"", ""CreatedDate"", ""LastUpdatedDate"", ""DeletedDate"")
                 SELECT '{id}', {Q(nameAz)}, {Q(location)}, {country}, NULL, {Q(status)}, {Q(amount)}, {Q(deadline)}, {Q(eligibleAz)}, '',
-                       {Q(buttonType)}, false, now(), now(), '0001-01-01'
+                       {Q(buttonType)}, false, now(), now(), '-infinity'
                 WHERE NOT EXISTS (SELECT 1 FROM ""ScholarshipTranslations"" WHERE ""Name"" = {Q(nameEn)});");
 
             AddTranslation(migrationBuilder, id, "az", nameAz, descAz, eligibleAz);
@@ -96,7 +96,7 @@ namespace Edusaz.Infrastructure.Migrations
             migrationBuilder.Sql($@"
                 INSERT INTO ""ScholarshipTranslations""
                     (""Id"", ""ScholarshipId"", ""LanguageId"", ""Name"", ""Description"", ""Eligible"", ""IsDeleted"", ""CreatedDate"", ""LastUpdatedDate"", ""DeletedDate"")
-                SELECT '{Guid.NewGuid()}', '{scholarshipId}', l.""Id"", {Q(name)}, {Q(description)}, {Q(eligible)}, false, now(), now(), '0001-01-01'
+                SELECT '{Guid.NewGuid()}', '{scholarshipId}', l.""Id"", {Q(name)}, {Q(description)}, {Q(eligible)}, false, now(), now(), '-infinity'
                 FROM ""Languages"" l
                 WHERE l.""Code"" = '{lang}' AND EXISTS (SELECT 1 FROM ""Scholarships"" WHERE ""Id"" = '{scholarshipId}');");
         }
