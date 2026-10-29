@@ -71,10 +71,12 @@ function UniversityCard({ uni, index }) {
               <small>{t('matchedUniversities.labels.tuition', 'Təhsil haqqı')}</small>
               <span>{localizeTuition(uni.tuition, i18n.language) || '—'}</span>
             </span>
-            <span className="bu-card__fact">
-              <small>{t('matchedUniversities.labels.acceptance', 'Qəbul faizi')}</small>
-              <span>{uni.acceptanceRate || '—'}</span>
-            </span>
+            {uni.acceptanceRate && (
+              <span className="bu-card__fact">
+                <small>{t('matchedUniversities.labels.acceptance', 'Qəbul faizi')}</small>
+                <span>{uni.acceptanceRate}</span>
+              </span>
+            )}
             <span className="bu-card__fact">
               <small>{t('matchedUniversities.labels.language', 'Tədris dili')}</small>
               <span title={localizeLanguages(uni.teachingLanguage, i18n.language) || undefined}>{mainLanguage || '—'}</span>

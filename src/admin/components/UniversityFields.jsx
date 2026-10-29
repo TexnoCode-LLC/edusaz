@@ -21,7 +21,7 @@ export const UNIVERSITY_EMPTY = {
   teachingLanguage: '',
   deadline: '',
   website: '',
-  hasScholarship: true,
+  hasScholarship: false,
   description: '',
   status: 'Active',
   images: [],
@@ -121,7 +121,7 @@ export function UniversityFields({ form, set, errors, countries, disabled, onBus
       <FormSection title="Qəbul və təhsil">
         <div className="grid gap-4 sm:grid-cols-3">
           <Field label="Reytinq">
-            {(p) => <Input {...p} value={form.ranking} onChange={(e) => set('ranking')(e.target.value)} placeholder="Məs: Top 100" disabled={disabled} />}
+            {(p) => <Input {...p} value={form.ranking} onChange={(e) => set('ranking')(e.target.value)} placeholder="Bilinmirsə boş saxlayın" disabled={disabled} />}
           </Field>
           <Field label="Təsis ili" error={errors.establishedYear}>
             {(p) => (
@@ -132,7 +132,7 @@ export function UniversityFields({ form, set, errors, countries, disabled, onBus
             {(p) => <Input {...p} value={form.tuition} onChange={(e) => set('tuition')(e.target.value)} placeholder="4,500 AZN / il" disabled={disabled} />}
           </Field>
           <Field label="Qəbul faizi">
-            {(p) => <Input {...p} value={form.acceptanceRate} onChange={(e) => set('acceptanceRate')(e.target.value)} placeholder="45%" disabled={disabled} />}
+            {(p) => <Input {...p} value={form.acceptanceRate} onChange={(e) => set('acceptanceRate')(e.target.value)} placeholder="Bilinmirsə boş saxlayın" disabled={disabled} />}
           </Field>
           <Field label="Tədris dili">
             {(p) => <Input {...p} value={form.teachingLanguage} onChange={(e) => set('teachingLanguage')(e.target.value)} placeholder="İngilis dili" disabled={disabled} />}
